@@ -1,32 +1,34 @@
-import axios from "axios";
+import axiosApi from '../axiosApi';
 
-export const SHOW_SEARCH = 'SHOW_SEARCH';
-export const SHOW_INFO = 'SHOW_INFO';
-export const FETCH_SHOW_FAILURE = 'FETCH_SHOW_FAILURE';
+export const FETCH_MENU_REQUEST = 'FETCH_MENU_REQUEST';
+export const FETCH_MENU_SUCCESS = 'FETCH_MENU_SUCCESS';
+export const FETCH_MENU_FAILURE = 'FETCH_MENU_FAILURE';
+export const FETCH_MENU_POST = 'FETCH_COUNTER_POST';
 
-export const fetchShowRequest = () => ({ type: SHOW_SEARCH });
-export const fetchShowSuccess = show => ({ type: SHOW_INFO, payload: show });
-export const fetchShowFailure = () => ({type: FETCH_SHOW_FAILURE});
+export const fetchMenuRequest = () => ({ type: FETCH_MENU_REQUEST });
+export const fetchMenuSuccess = dishList => ({ type: FETCH_MENU_SUCCESS, dishList });
+export const fetchMenuFailure = () => ({type: FETCH_MENU_FAILURE});
+export const fetchMenuPost = () => ({type: FETCH_MENU_POST})
 
-export const fetchShow = () => {
+export const fetchDishMenu = () => {
     return async dispatch => {
-        try {
-            dispatch(fetchShowRequest());
-            const response = await axios.get('http://api.tvmaze.com/search/shows?q=' );
-            dispatch(fetchShowSuccess(response.data));
+        dispatch(fetchMenuRequest());
+        try {   
+            const response = await axiosApi.get('menuList.json');
+            dispatch(fetchMenuSuccess(Object.values(response.data)));
         } catch (e) {
-            dispatch(fetchShowFailure());
+            dispatch(fetchMenuFailure());
         }
     };
 };
 
-export const fetchShowInfo = () => {
-    return async (dispatch, getState) => {
-        // const { show } = getState();
+// export const fetchShowInfo = () => {
+//     return async (dispatch, getState) => {
+//         // const { show } = getState();
 
-        let url = 'http://api.tvmaze.com/shows/' ;
-        const response = await axios.get(url);
+//         let url = 'http://api.tvmaze.com/shows/' ;
+//         const response = await axios.get(url);
 
-        dispatch(fetchShowSuccess(response.data));
-    };
-};
+//         dispatch(fetchShowSuccess(response.data));
+//     };
+// };

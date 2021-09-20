@@ -1,11 +1,11 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core';
-import { Container, Grid, CssBaseline, Card, Typography, CardContent, CardMedia, CardActions, Button, Box } from '@material-ui/core';
+import { Container, Grid, CssBaseline, Card, Typography, CardContent, CardActions, Button, Box } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const OrderInfo = () => {
-    const theme = useTheme();
     return (
-        <Container maxWidth='md' sx={{ marginTop: '2rem' }}>
+        <Container maxWidth='md' sx={{ marginTop: '3rem' }}>
             <CssBaseline />
             <Grid
                 container
@@ -14,28 +14,33 @@ const OrderInfo = () => {
                 alignItems="center"
             >
                 <Grid item>
-                    <Card sx={{ display: 'flex' , minWidth: '400px'}}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' , alignItems: 'center' ,minWidth: '400px'}}>
+                    <Card sx={{ display: 'flex', minWidth: '400px' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', minWidth: '400px' }}>
                             <CardContent >
                                 <Typography color="textSecondary" gutterBottom>
                                     Your order:
                                 </Typography>
                             </CardContent>
-                            <CardContent >
-                                <Typography color="textSecondary" gutterBottom>
-                                    220 KGS
-                                </Typography>
+                            <CardContent>
+                                <Grid container justifyContent='space-between' alignItems="center">
+                                    <Typography color="textSecondary" px={4}>
+                                        220 KGS
+                                    </Typography>
+                                    <IconButton aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ Grid>
                             </CardContent>
                             <CardContent sx={{ borderTop: '1px solid gray' }}>
                                 <Typography color="textSecondary" gutterBottom>
                                     Delivery: 150 KGS
                                 </Typography>
                                 <Typography color="textSecondary" gutterBottom>
-                                    Total:
+                                    Total: 370 KGS
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained">Contained</Button>
+                                <Button variant="contained">Place Order</Button>
                             </CardActions>
                         </Box>
                     </Card>

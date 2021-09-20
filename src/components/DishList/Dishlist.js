@@ -1,11 +1,18 @@
-import * as React from 'react';
-// import { useTheme } from '@mui/material/styles';
-import { useTheme } from '@material-ui/core';
+import React, { useEffect } from 'react';
 import { Container, Grid, CssBaseline, Card, Typography, CardContent, CardMedia, CardActions, Button, Box } from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDishMenu } from "../../store/actions";
 
 const Dishlist = () => {
-    const theme = useTheme();
+
+    const dispatch = useDispatch();
+    const dishList = useSelector(state => state.dishList);
+
+    useEffect(() => {
+        dispatch(fetchDishMenu());
+    }, [dispatch]);
+
 
     return (
         <Container maxWidth='md' sx={{ marginTop: '2rem' }}>
@@ -17,29 +24,31 @@ const Dishlist = () => {
                 alignItems="center"
             >
                 <Grid item>
-                    <Card sx={{ display: 'flex' }}>
-                        <CardMedia
-                            component="img"
-                            image='https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-                            sx={{ width: 150 }}
-                            title="Food"
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-                            <CardContent >
+                    {dishList.map((dish , id) => (
+                        <Card sx={{ display: 'flex' , marginTop: '1rem'}} key={id}>
+                            <CardMedia
+                                component="img"
+                                image={dish.img}
+                                sx={{ width: 180 }}
+                                title="Food"
+                            />
+                            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' , minWidth: '300px' }}>
+                                <CardContent >
+                                    <Typography color="textSecondary" gutterBottom>
+                                        {dish.dish}
+                                    </Typography>
+                                </CardContent>
                                 <Typography color="textSecondary" gutterBottom>
-                                    Pizza
+                                    {dish.price} KGS
                                 </Typography>
-                            </CardContent>
-                            <Typography color="textSecondary" gutterBottom>
-                                220 KGS
-                            </Typography>
-                            <CardActions>
-                                <Button variant="contained" startIcon={<AddShoppingCartIcon />}>
-                                    Add to cart
-                                </Button>
-                            </CardActions>
-                        </Box>
-                    </Card>
+                                <CardActions sx={{ display: 'flex' , justifyContent: 'center'}}>
+                                    <Button variant="contained" startIcon={<AddShoppingCartIcon />}>
+                                        Add to cart
+                                    </Button>
+                                </CardActions>
+                            </Box>
+                        </Card>
+                    ))}
                 </Grid>
             </Grid>
         </Container>

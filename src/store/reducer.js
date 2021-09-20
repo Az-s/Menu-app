@@ -1,24 +1,29 @@
 import {
-    SHOW_SEARCH,
-    SHOW_INFO,
-    FETCH_SHOW_FAILURE,
+  FETCH_MENU_REQUEST,
+  FETCH_MENU_SUCCESS,
+  FETCH_MENU_FAILURE,
+  FETCH_MENU_POST,
 } from "./actions";
 
 const initialState = {
-    shows: [],
-    text: '',
-    showInfo: null,
+  dishList: [],
+  text: '',
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case SHOW_SEARCH:
-        return {...state, fetchShowLoading: true};
-      case SHOW_INFO:
-        return {...state, fetchShowLoading: false, shows: action.payload};
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {
+    case FETCH_MENU_REQUEST:
+      return { ...state,  };
+    case FETCH_MENU_SUCCESS:
+      return { ...state,  dishList: action.dishList };
+    case FETCH_MENU_FAILURE:
+      return { ...state,  error: action.payload };
+    case FETCH_MENU_POST:
+      return { ...state,  shows: action.payload };
+    default:
+      return state;
+  }
+};
 
 export default reducer;
