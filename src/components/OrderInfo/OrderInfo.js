@@ -10,12 +10,20 @@ import InputFields from '../InputFields/InputFields';
 const OrderInfo = ({ history }) => {
     const dispatch = useDispatch();
     // const dishes = useSelector(state => state.orderInfo.menuList);
-    // const totalPrice = useSelector(state => state.orderInfo.totalPrice);
+    const totalPrice = useSelector(state => state.orderInfo.totalPrice);
     const showPurchaseModal = useSelector(state => state.orderInfo.showPurchaseModal);
 
     // useEffect(() => {
     //     dispatch(INIT_DISH_ORDER());
     //   }, [dispatch]);
+
+    // const purchasable = useMemo(() => {
+    //     const totalIngredients = Object.keys(ingredients)
+    //       .map(type => ingredients[type])
+    //       .reduce((sum, el) => sum + el, 0);
+    
+    //     return totalIngredients > 0;
+    //   }, [ingredients]);
 
     const purchaseHandler = () => {
         dispatch(setModalOpen(true));
@@ -26,7 +34,7 @@ const OrderInfo = ({ history }) => {
 
     const purchaseContinueHandler = () => {
         history.push('/checkout');
-      };
+    };
 
     return (
         <Container maxWidth='md' sx={{ marginTop: '3rem' }}>
@@ -71,11 +79,17 @@ const OrderInfo = ({ history }) => {
                                     Delivery: 150 KGS
                                 </Typography>
                                 <Typography color="textSecondary" gutterBottom>
-                                    Total: 370 KGS
+                                    Total: {totalPrice} KGS
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" onClick={purchaseHandler}>Place Order</Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={purchaseHandler}
+                                    // disabled={!purchasable}
+                                >
+                                    Place Order
+                                </Button>
                             </CardActions>
                         </Box>
                     </Card>

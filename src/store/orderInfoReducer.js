@@ -1,11 +1,8 @@
-import {ADD_DISH, REMOVE_DISH, INIT_DISH_ORDER, SET_MODAL_OPEN} from "../store/orderInfoActions";
+import { ADD_DISH, REMOVE_DISH, INIT_DISH_ORDER, SET_MODAL_OPEN } from "../store/orderInfoActions";
 
 const initialState = {
-    menuList: {
-        dish: '',
-        price: 0,
-      },
-  totalPrice: 0,
+  // dishList,
+  totalPrice: 150,
   showPurchaseModal: false,
   something: 'test',
 };
@@ -13,16 +10,16 @@ const initialState = {
 const reducerOrderInfo = (state = initialState, action) => {
   switch (action.type) {
     case INIT_DISH_ORDER:
-      return {...initialState};
-    // case ADD_DISH:
-    //   return {
-    //     ...state,
-    //     menuList: {
-    //       ...state.menuList,
-    //       [action.payload]: state.menuList[action.payload] + 1 // state.ingredients['meat']
-    //     },
-    //     totalPrice: state.totalPrice + menuList[action.payload].price
-    //   };
+      return { ...initialState };
+      // case ADD_DISH:
+      //   return {
+      //     ...state,
+      //     dishList: {
+      //       ...state.dishList,
+      //       [action.payload]: state.dishList[action.payload] + 1 // state.ingredients['meat']
+      //     },
+      //     totalPrice: state.totalPrice + dishList[action.payload].price
+      //   };
     // case REMOVE_DISH:
     //   if (state.menuList[action.payload] <= 0) {
     //     return state;
