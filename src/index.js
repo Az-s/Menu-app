@@ -12,8 +12,8 @@ import './index.css';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  orderInfo: reducerOrderInfo,
   list: reducer,
+  orderInfo: reducerOrderInfo,
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

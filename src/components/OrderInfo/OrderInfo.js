@@ -1,29 +1,45 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { Container, Grid, CssBaseline, Card, Typography, CardContent, CardActions, Button, Box } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch, useSelector } from "react-redux";
-import { setModalOpen, INIT_DISH_ORDER, SET_MODAL_OPEN, REMOVE_DISH } from '../../store/orderInfoActions';
+import { setModalOpen } from '../../store/orderInfoActions';
 import Modal from '../Modal/Modal';
 import InputFields from '../InputFields/InputFields';
 
-const OrderInfo = ({ history }) => {
+const OrderInfo = ({ dishes, orderCart, remove, history }) => {
     const dispatch = useDispatch();
-    // const dishes = useSelector(state => state.orderInfo.menuList);
-    const totalPrice = useSelector(state => state.orderInfo.totalPrice);
     const showPurchaseModal = useSelector(state => state.orderInfo.showPurchaseModal);
 
-    // useEffect(() => {
-    //     dispatch(INIT_DISH_ORDER());
-    //   }, [dispatch]);
-
-    // const purchasable = useMemo(() => {
-    //     const totalIngredients = Object.keys(ingredients)
-    //       .map(type => ingredients[type])
-    //       .reduce((sum, el) => sum + el, 0);
+    let totalSum = 0;
     
-    //     return totalIngredients > 0;
-    //   }, [ingredients]);
+    const items = Object.keys(orderCart).map(id => {
+        const dish = dishes.find(d => d.id === id);
+        const count = orderCart[id];
+        const dishSum = count * dish.price;
+        totalSum += dishSum + 150;
+        
+        return (
+            <>
+                <CardContent>
+                    <Grid container justifyContent='space-between' alignItems="center">
+                        <Typography color="textSecondary" px={4}>
+                            {dish.dish} {dish.price} KGS  x{orderCart[id]} Sum: {dishSum}
+                        </Typography>
+                        <IconButton aria-label="delete" onclick={remove}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </ Grid>
+                </CardContent>
+            </>
+        )
+    });
+    
+    // const totalCount = Object.keys(orderCart).reduce((sum ,id) => sum + orderCart[id] ,0);
+
+    const purchasable = () => {
+        if ( totalSum === 0);
+    };
 
     const purchaseHandler = () => {
         dispatch(setModalOpen(true));
@@ -33,7 +49,7 @@ const OrderInfo = ({ history }) => {
     };
 
     const purchaseContinueHandler = () => {
-        history.push('/checkout');
+        history.push('/');
     };
 
     return (
@@ -44,8 +60,8 @@ const OrderInfo = ({ history }) => {
                 close={purchaseCancelHandler}
             >
                 <InputFields
-                    // ingredients={ingredients}
-                    // totalPrice={totalPrice}
+                    orders={dishes}
+                    totalPrice={totalSum}
                     onCancel={purchaseCancelHandler}
                     onContinue={purchaseContinueHandler}
                 />
@@ -64,29 +80,20 @@ const OrderInfo = ({ history }) => {
                                     Your order:
                                 </Typography>
                             </CardContent>
-                            <CardContent>
-                                <Grid container justifyContent='space-between' alignItems="center">
-                                    <Typography color="textSecondary" px={4}>
-                                        {} KGS
-                                    </Typography>
-                                    <IconButton aria-label="delete">
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </ Grid>
-                            </CardContent>
+                            {items}
                             <CardContent sx={{ borderTop: '1px solid gray' }}>
                                 <Typography color="textSecondary" gutterBottom>
                                     Delivery: 150 KGS
                                 </Typography>
                                 <Typography color="textSecondary" gutterBottom>
-                                    Total: {totalPrice} KGS
+                                    Total: {totalSum} KGS
                                 </Typography>
                             </CardContent>
                             <CardActions>
                                 <Button
                                     variant="contained"
                                     onClick={purchaseHandler}
-                                    // disabled={!purchasable}
+                                    disabled={!purchasable}
                                 >
                                     Place Order
                                 </Button>

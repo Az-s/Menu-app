@@ -6,8 +6,7 @@ import {
 } from "./actions";
 
 const initialState = {
-  dishList: [],
-  text: '',
+  dishes: [],
   error: null,
 };
 
@@ -16,7 +15,7 @@ const reducer = (state = initialState, action) => {
     case FETCH_MENU_REQUEST:
       return { ...state};
     case FETCH_MENU_SUCCESS:
-      return { ...state, dishList: action.dishList };
+      return { ...state, dishes: action.dishes };
     case FETCH_MENU_FAILURE:
       return { ...state, error: action.payload };
     case FETCH_MENU_POST:

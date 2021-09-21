@@ -30,22 +30,22 @@ const InputFields = (props , {history}) => {
                 // order,
             });
         } finally {
-            // history.replace('/');
+            history.push('/');
         }
     };
 
     return (
         <>
             <h3>Your order:</h3>
-            <ul>
-                {/* {Object.keys(props.ingredients).map(type => (
-                    <li key={type}>
+            {/* <ul>
+                {Object.keys(props.dishes).map((type , id) => (
+                    <li key={id}>
                         <span style={{ textTransform: 'capitalize' }}>
                             {type}
-                        </span>: {props.ingredients[type]}
+                        </span>: {props.orderCart[id]}
                     </li>
-                ))} */}
-            </ul>
+                ))}
+            </ul> */}
             <p><strong>Total Price: {props.totalPrice} KGS</strong></p>
             <p>Fill the fields:</p>
             <form noValidate autoComplete="off" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minWidth: '100%', }} onSubmit={createOrder}>
@@ -57,7 +57,7 @@ const InputFields = (props , {history}) => {
                     onChange={onInputChange}
                 />
                 <TextField id="filled-basic" label="Number"
-                    type='number'
+                    type='text'
                     name="number"
                     variant="filled"
                     value={customer.number}
@@ -72,8 +72,8 @@ const InputFields = (props , {history}) => {
                     style={{ marginBottom: '5px' }}
                 />
             </form>
-            <Button type="button" variant="contained" color="secondary" onClick={props.onCancel} sx={{ marginRight: '5px' }}>CANCEL</Button>
-            <Button type="submit" variant="contained" color="primary" onClick={createOrder}>CONTINUE</Button>
+            <Button type="button" variant="contained" color="secondary" onClick={props.onCancel} sx={{ marginRight: '5px' }}>Close</Button>
+            <Button type="submit" variant="contained" color="primary" onClick={createOrder}>Create Order</Button>
         </>
     )
 };
