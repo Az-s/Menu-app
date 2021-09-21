@@ -61,7 +61,7 @@ const OrderInfo = ({ dishes, orderCart, remove, history }) => {
                 close={purchaseCancelHandler}
             >
                 <InputFields
-                    orders={dishes}
+                    orderCart={orderCart}
                     totalPrice={totalSum}
                     onCancel={purchaseCancelHandler}
                     onContinue={purchaseContinueHandler}

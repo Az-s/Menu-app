@@ -30,22 +30,22 @@ const InputFields = (props , {history}) => {
                 // order,
             });
         } finally {
-            history.push('/');
+            // history.push('/');
         }
     };
 
     return (
         <>
             <h3>Your order:</h3>
-            {/* <ul>
-                {Object.keys(props.dishes).map((type , id) => (
+            <ul>
+                {Object.keys(props.orderCart).map((type , id) => (
                     <li key={id}>
                         <span style={{ textTransform: 'capitalize' }}>
-                            {type}
+                             {type}
                         </span>: {props.orderCart[id]}
                     </li>
                 ))}
-            </ul> */}
+            </ul>
             <p><strong>Total Price: {props.totalPrice} KGS</strong></p>
             <p>Fill the fields:</p>
             <form noValidate autoComplete="off" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minWidth: '100%', }} onSubmit={createOrder}>
