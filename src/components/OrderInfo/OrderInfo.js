@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useMemo} from 'react';
 import { Container, Grid, CssBaseline, Card, Typography, CardContent, CardActions, Button, Box } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -35,11 +35,12 @@ const OrderInfo = ({ dishes, orderCart, remove, history }) => {
         )
     });
     
-    // const totalCount = Object.keys(orderCart).reduce((sum ,id) => sum + orderCart[id] ,0);
-
-    const purchasable = () => {
-        if ( totalSum === 0);
-    };
+    const purchasable = useMemo(() => {
+        const totalCount = Object.keys(orderCart)
+          .reduce((sum, id) => sum + orderCart[id], 0);
+    
+        return totalCount > 0;
+      }, [orderCart]);
 
     const purchaseHandler = () => {
         dispatch(setModalOpen(true));
