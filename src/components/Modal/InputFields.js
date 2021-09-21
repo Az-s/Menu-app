@@ -1,18 +1,25 @@
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
 
-const InputFields = () => {
+import './InputFields';
+
+const InputFields = (props) => {
+
     return (
-        <div>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+        <>
+            <Backdrop
+                show={props.show}
+                onClick={props.close}
+            />
+            <div
+                className="Modal"
+                style={{
+                    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: props.show ? '1' : '0',
+                }}
             >
-                {body}
-            </Modal>
-        </div>
+                {props.children}
+            </div>
+        </>
     )
 }
 

@@ -1,5 +1,6 @@
 import { Grid, Box } from '@material-ui/core';
 import Dishlist from '../components/DishList/Dishlist';
+import InputFields from '../components/Modal/InputFields';
 import OrderInfo from '../components/OrderInfo/OrderInfo';
 import './App.css';
 
@@ -15,6 +16,7 @@ const App = () =>{
             <Grid item xs={4}>
                 <OrderInfo />
             </Grid>
+            <InputFields />
           </Grid>
         </Box>
     </div >
