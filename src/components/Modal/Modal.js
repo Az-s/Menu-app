@@ -1,9 +1,8 @@
 import React from 'react';
+import Backdrop from '../Backdrop/Backdrop';
+import './Modal.css';
 
-import './InputFields';
-
-const InputFields = (props) => {
-
+const Modal = (props) => {
     return (
         <>
             <Backdrop
@@ -23,4 +22,4 @@ const InputFields = (props) => {
     )
 }
 
-export default InputFields;
+export default Modal;

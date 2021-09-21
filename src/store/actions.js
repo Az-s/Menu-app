@@ -7,7 +7,7 @@ export const FETCH_MENU_POST = 'FETCH_COUNTER_POST';
 
 export const fetchMenuRequest = () => ({ type: FETCH_MENU_REQUEST });
 export const fetchMenuSuccess = dishList => ({ type: FETCH_MENU_SUCCESS, dishList });
-export const fetchMenuFailure = () => ({type: FETCH_MENU_FAILURE});
+export const fetchMenuFailure = (error) => ({type: FETCH_MENU_FAILURE , payload: error});
 export const fetchMenuPost = () => ({type: FETCH_MENU_POST})
 
 export const fetchDishMenu = () => {
@@ -22,13 +22,14 @@ export const fetchDishMenu = () => {
     };
 };
 
-// export const fetchShowInfo = () => {
-//     return async (dispatch, getState) => {
-//         // const { show } = getState();
-
-//         let url = 'http://api.tvmaze.com/shows/' ;
-//         const response = await axios.get(url);
-
-//         dispatch(fetchShowSuccess(response.data));
-//     };
-// };
+export const createOrder = (orderData) => {
+    return async dispatch => {
+        try {   
+            dispatch(fetchMenuRequest());
+            await axiosApi.post('orders.json' , orderData);
+            dispatch(fetchMenuSuccess());
+        } catch (error) {
+            dispatch(fetchMenuFailure(error));
+        }
+    };
+};

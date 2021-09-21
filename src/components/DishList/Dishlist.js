@@ -7,7 +7,7 @@ import { fetchDishMenu } from "../../store/actions";
 const Dishlist = () => {
 
     const dispatch = useDispatch();
-    const dishList = useSelector(state => state.dishList);
+    const dishList = useSelector(state => state.list.dishList);
 
     useEffect(() => {
         dispatch(fetchDishMenu());
