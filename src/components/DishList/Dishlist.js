@@ -13,7 +13,6 @@ const Dishlist = () => {
         dispatch(fetchDishMenu());
     }, [dispatch]);
 
-
     return (
         <Container maxWidth='md' sx={{ marginTop: '2rem' }}>
             <CssBaseline />

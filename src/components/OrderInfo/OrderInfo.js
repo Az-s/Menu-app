@@ -67,7 +67,7 @@ const OrderInfo = ({ history }) => {
                             <CardContent>
                                 <Grid container justifyContent='space-between' alignItems="center">
                                     <Typography color="textSecondary" px={4}>
-                                        220 KGS
+                                        {} KGS
                                     </Typography>
                                     <IconButton aria-label="delete">
                                         <DeleteIcon />

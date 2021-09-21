@@ -22,14 +22,14 @@ export const fetchDishMenu = () => {
     };
 };
 
-export const createOrder = (orderData) => {
-    return async dispatch => {
-        try {   
-            dispatch(fetchMenuRequest());
-            await axiosApi.post('orders.json' , orderData);
-            dispatch(fetchMenuSuccess());
-        } catch (error) {
-            dispatch(fetchMenuFailure(error));
-        }
-    };
-};
+// export const createOrder = (orderData) => {
+//     return async dispatch => {
+//         try {   
+//             dispatch(fetchMenuRequest());
+//             await axiosApi.post('orders.json' , orderData);
+//             dispatch(fetchMenuSuccess());
+//         } catch (error) {
+//             dispatch(fetchMenuFailure(error));
+//         }
+//     };
+// };

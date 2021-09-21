@@ -14,13 +14,13 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MENU_REQUEST:
-      return { ...state,  };
+      return { ...state};
     case FETCH_MENU_SUCCESS:
-      return { ...state,  dishList: action.dishList };
+      return { ...state, dishList: action.dishList };
     case FETCH_MENU_FAILURE:
-      return { ...state,  error: action.payload };
+      return { ...state, error: action.payload };
     case FETCH_MENU_POST:
-      return { ...state,  shows: action.payload };
+      return { ...state, shows: action.payload };
     default:
       return state;
   }

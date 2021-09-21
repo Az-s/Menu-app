@@ -18,6 +18,6 @@ const DishMenu = () => {
             </Box>
         </>
     )
-}
+};
 
 export default DishMenu;

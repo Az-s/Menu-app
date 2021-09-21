@@ -76,6 +76,6 @@ const InputFields = (props , {history}) => {
             <Button type="submit" variant="contained" color="primary" onClick={createOrder}>CONTINUE</Button>
         </>
     )
-}
+};
 
 export default InputFields;

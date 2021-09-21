@@ -20,6 +20,6 @@ const Modal = (props) => {
             </div>
         </>
     )
-}
+};
 
 export default Modal;
